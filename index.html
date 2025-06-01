@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<title>Portfolio Saya</title>
+ <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav {
+    display: flex;
+    gap: 15px;
+  }
+
+  nav button {
+    background: transparent;
+    border: 2px solid transparent;
+    color: #e0e0e0;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  nav button:hover, nav button.active {
+    color: #2a5298;
+    background: #fff;
+    border-color: #fff;
+  }
+
+  main {
+    margin-top: 60px;
+    flex: 1;
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+  }
+
+  section {
+    min-width: 100vw;
+    padding: 40px 20px 60px 20px;
+    overflow-y: auto;
+    scroll-snap-align: start;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  main::-webkit-scrollbar, section::-webkit-scrollbar {
+    width: 6px; height: 6px;
+  }
+  main::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+  }
+
+  h1, h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #a0c4ff;
+  }
+
+  p {
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  /* Home Section */
+  #home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    padding: 60px 40px 60px 40px;
+    text-align: center;
+  }
+  #home h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #a0c4ff;
+  }
+  #home p {
+    font-size: 18px;
+    color: #e0e0e0;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  #home .profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    border: 3px solid #a0c4ff;
+    animation: floatPulse 3s ease-in-out infinite;
+  }
+  #home .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* About Me */
+  #about {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    padding: 30px 40px;
+    flex-direction: row-reverse; /* Profile photo on right */
+    position: relative;
+  }
+
+  /* Profile image container */
+  #about .profile-pic {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    border: 3px solid #a0c4ff;
+    animation: floatPulse 3s ease-in-out infinite;
+  }
+  #about .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #about .about-text {
+    flex: 1;
+    color: #fff;
+  }
+
+  /* Education */
+  #education ul {
+    list-style: none;
+    max-width: 700px;
+    margin: auto;
+  }
+  #education li {
+    background: rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    animation: slideInLeft 0.6s ease forwards;
+  }
+  #education li:nth-child(odd) {
+    animation-delay: 0.2s;
+  }
+  #education li:nth-child(even) {
+    animation-delay: 0.4s;
+  }
+  #education li h3 {
+    margin-bottom: 7px;
+    font-weight: 700;
+  }
+  #education li span {
+    font-size: 14px;
+    color: #b0b0b0;
+  }
+
+  /* Skills as a list */
+  #skills {
+    max-width: 700px;
+    margin: auto;
+  }
+  #skills ul {
+    list-style: disc;
+    padding-left: 25px;
+    font-size: 16px;
+    max-width: 700px;
+    margin: auto;
+  }
+  #skills ul li {
+    margin-bottom: 10px;
+    color: #efefef;
+    font-weight: 600;
+  }
+
+  /* Certificates as carousel photos */
+  #certificates {
+    max-width: 700px;
+    margin: auto;
+    position: relative;
+  }
+  .cert-carousel {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .cert-list {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .cert-item {
+    min-width: 100%;
+    padding: 10px 0;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cert-item img {
+    max-height: 220px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    object-fit: contain;
+  }
+  .carousel-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  .carousel-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    color: #2a5298;
+    font-size: 30px;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  .carousel-btn:hover {
+    background: #a0c4ff;
+    color: #fff;
+  }
+
+  /* Contact */
+  #contact {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 30px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    color: #fff;
+  }
+  #contact h1 {
+    margin-bottom: 25px;
+  }
+  #contact .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    font-size: 16px;
+  }
+  #contact .contact-item:last-child {
+    margin-bottom: 0;
+  }
+  #contact .contact-icon {
+    flex-shrink: 0;
+    margin-right: 15px;
+    width: 26px;
+    height: 26px;
+    color: #a0c4ff;
+  }
+  #contact .contact-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+  #contact .contact-text a {
+    color: #a0c4ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  #contact .contact-text a:hover {
+    color: #fff;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(30px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+
+  @keyframes slideInLeft {
+    0% {opacity: 0; transform: translateX(-30px);}
+    100% {opacity: 1; transform: translateX(0);}
+  }
+
+  @keyframes floatPulse {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(160, 196, 255, 0.8);
+    }
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 375px) {
+    nav button {
+      font-size: 12px;
+      padding: 7px 12px;
+    }
+    h1 {
+      font-size: 22px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    section {
+      padding: 30px 15px 50px 15px;
+    }
+    #about {
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    #about .profile-pic {
+      margin-top: 20px;
+      width: 120px;
+      height: 120px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #about .about-text {
+      max-width: 100%;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav id="navbar">
+    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+  <li class="nav-item" role="presentation">
+    <button data-target="home" class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Home</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button data-target="about" class="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">About Me</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button data-target="education"class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Education</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button data-target="skills"class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Skills</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button data-target="certificates"class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Certificates</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button data-target="contact"class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Contact</button>
+  </li>
+</ul>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="0">
+  <section id="home">
+    <h1>Selamat Datang </h1>
+    <div class="profile-pic" aria-label="Foto Profil Home">
+      <img src="Foto profile.png" alt="Foto Profil" />
+    </div>
+    <p>Perkenalkan, saya <strong>Novita Fitri Cahyanti</strong>, selamat datang di portofolio pribadi saya. Temukan lebih banyak tentang saya di navigasi atas.</p>
+  </section>
+
+  <section id="about"> 
+    <div class="about-text">
+      <h1>About Me</h1>
+      <p>Halo! Saya adalah seorang siswi SMKN 1 Ngelegok jurusan TKJ (Tenknik Komputer dan Jaringan) yang memiliki minat dalam jaringan komputer, perakitan perangkat, dan troubleshooting sistem. Saya ingin mengembangkan keterampilan teknis dan mendapatkan pengalaman nyata. Dengan semangat belajar dan disiplin, saya akan terus mengembangkan kemampuan teknis dan siap berkontribusi dalam dunia teknologi masa depan.</p>
+    </div>
+    <div class="profile-pic" aria-label="Foto profil">
+      <img src="Foto profile.png" alt="Foto Profil" />
+    </div>
+  </section>
+
+  <section id="education">
+    <h1>Education</h1>
+    <ul>
+      <li>
+        <h3>SMKN 1 Nglegok</h3>
+        <span>Teknik Komputer dan Jaringan | 2023 - 2026</span>
+      </li>
+      <li>
+        <h3>SMPN Gandusari 2</h3>
+        <span>2020 - 2023</span>
+      </li>
+      <li>
+        <h3>SDN Sukosewu 3</h3>
+        <span>2014 - 2020</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="skills">
+    <h1>Skills</h1>
+    <ul>
+      <h2><strong>Mikrotik</strong></h2>
+      <li>Network Fundamental, Wireless, Tunnel, Routing (static and dynamic), OSPF, Firewall, Hotspot, QOS, Load Balance</li>
+      <h2><strong>Linux Debian</strong></h2>
+      <li>Linux Fundamental, Management User and Group, Management File, Samba Server, NTP Server, DNS Server, DHCP Server, FTP Server</li>
+      <h2><strong>Website Programing</strong></h2>
+      <li>HTML, CSS, JavaScript, Deeploy</li>
+      <h2><strong>Cabling</strong></h2>
+      <li>Crimpring kabel UTP (cross and straight), FO (Fiber Optik)</li>
+    </ul>
+  </section>
+
+  <section id="certificates">
+    <h1>Certificates</h1>
+    <div class="cert-carousel" aria-label="Carousel sertifikat">
+      <div class="cert-list" aria-live="polite" aria-atomic="true">
+        <div class="cert-item" role="group" aria-label="Sertifikat 1">
+          <img src="linux.jpg" alt="Sertifikat 1" />
+        </div>
+        <div class="cert-item" role="group" aria-label="Sertifikat 2">
+          <img src="net.jpg" alt="Sertifikat 2" />
+        </div>
+        <div class="cert-item" role="group" aria-label="Sertifikat 3">
+          <img src="vm.jpg" alt="Sertifikat 3" />
+        </div>
+        <div class="cert-item" role="group" aria-label="Sertifikat 4">
+          <img src="frtnt 1.jpg" alt="Sertifikat 4" />
+        </div>
+        <div class="cert-item" role="group" aria-label="Sertifikat 5">
+          <img src="landscape.jpg" alt="Sertifikat 5" />
+        </div>
+        <div class="cert-item" role="group" aria-label="Sertifikat 6">
+          <img src="cybersecurity.jpg" alt="Sertifikat 6" />
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prev-btn" aria-label="Sertifikat sebelumnya">&lt;</button>
+        <button class="carousel-btn" id="next-btn" aria-label="Sertifikat berikutnya">&gt;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h1>Contact</h1>
+    <div class="contact-item">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12.713l11.985-7.17v13.385c0 1.104-.897 2-2 2h-20c-1.103 0-2-.896-2-2v-13.385l11.985 7.17zM12 11.713l-12-7.186v-.529c0-1.104.897-2 2-2h20c1.103 0 2 .896 2 2v.529l-12 7.186z"/>
+        </svg>
+      </div>
+      <div class="contact-text">
+        <a href="mailto:email@example.com">email : novitafitricahyanti@gmail.com</a>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.6 10.79a15.05 15.05 0 0 0 6.58 6.58l2.2-2.2a1 1 0 0 1 1.11-.21 11.36 11.36 0 0 0 3.55.57c.55 0 1 .45 1 1v3.46c0 .55-.45 1-1 1A18 18 0 0 1 2 6c0-.55.45-1 1-1h3.46c.55 0 1 .45 1 1a11.36 11.36 0 0 0 .57 3.55 1 1 0 0 1-.21 1.11l-2.22 2.13z"/>
+        </svg>
+      </div>
+      <div class="contact-text">+62 858 5272 9746</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.75 2C4.67893 2 2 4.67893 2 7.75V16.25C2 19.3211 4.67893 22 7.75 22H16.25C19.3211 22 22 19.3211 22 16.25V7.75C22 4.67893 19.3211 2 16.25 2H7.75ZM20.5 7.75V16.25C20.5 18.4276 18.4276 20.5 16.25 20.5H7.75C5.57243 20.5 3.5 18.4276 3.5 16.25V7.75C3.5 5.57243 5.57243 3.5 7.75 3.5H16.25C18.4276 3.5 20.5 5.57243 20.5 7.75ZM12 7C9.79086 7 8 8.79086 8 11C8 13.2091 9.79086 15 12 15C14.2091 15 16 13.2091 16 11C16 8.79086 14.2091 7 12 7Z"/>
+        </svg>
+      </div>
+      <div class="contact-text"><a href="https://instagram.com/novittafc" target="_blank" rel="noopener">@novittafc</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186C23.407 5.669 23.162 5.195 22.79 4.823C22.418 4.451 21.945 4.206 21.427 4.115C19.854 3.858 12 3.858 12 3.858C12 3.858 4.146 3.858 2.573 4.115C2.055 4.206 1.582 4.451 1.21 4.823C0.838 5.195 0.593 5.669 0.502 6.186C0.286 7.763 0.286 12 0.286 12C0.286 12 0.286 16.237 0.502 17.814C0.593 18.331 0.838 18.805 1.21 19.177C1.582 19.549 2.055 19.794 2.573 19.885C4.146 20.142 12 20.142 12 20.142C12 20.142 19.854 20.142 21.427 19.885C21.945 19.794 22.418 19.549 22.79 19.177C23.162 18.805 23.407 18.331 23.498 17.814C23.714 16.237 23.714 12 23.714 12C23.714 12 23.714 7.763 23.498 6.186ZM9.545 15.568V8.432L15.818 12L9.545 15.568Z"/>
+        </svg>
+      </div>
+      <div class="contact-text"><a href="https://youtube.com/@novitafitricahyanti5421" target="_blank" rel="noopener">@novitafitricahyanti5421</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="26px" height="26px">
+          <path d="M12 2C8.134 2 5 5.134 5 9c0 4.438 7 13 7 13s7-8.562 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.503 2.503 0 0 1 12 11.5z"/>
+        </svg>
+      </div>
+      <div class="contact-text">Dsn.Sukoreno 03/05, Ds.Sukosewu, Kec.Gandusari, Kab.Blitar, Jawa Timur</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (() => {
+    const navButtons = document.querySelectorAll('#navbar button');
+    const mainContent = document.getElementById('main-content');
+
+    navButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mainContent.scrollTo({ left: idx * window.innerWidth, behavior: 'smooth' });
+      });
+    });
+
+    mainContent.addEventListener('scroll', () => {
+      const scrollLeft = mainContent.scrollLeft;
+      const index = Math.round(scrollLeft / window.innerWidth);
+      navButtons.forEach(b => b.classList.remove('active'));
+      if (navButtons[index]) navButtons[index].classList.add('active');
+    });
+
+    // Certificates carousel
+    const certList = document.querySelector('.cert-list');
+    const certItems = document.querySelectorAll('.cert-item');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    let currentCert = 0;
+
+    function updateCarousel() {
+      certList.style.transform = `translateX(-${currentCert * 100}%)`;
+    }
+    prevBtn.addEventListener('click', () => {
+      currentCert = (currentCert === 0) ? certItems.length - 1 : currentCert - 1;
+      updateCarousel();
+    });
+    nextBtn.addEventListener('click', () => {
+      currentCert = (currentCert + 1) % certItems.length;
+      updateCarousel();
+    });
+
+  mainContent.setAttribute('tabindex', '0');
+  })();
+</script>
+
+</body>
+</html>
